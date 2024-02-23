@@ -50,51 +50,55 @@ const emitTyping = () => {
 </script>
 
 <template>
-  <div class="chat">
+  <div class="p-10 h-full">
     <div v-if="!joined">
       <form @submit.prevent="join">
-        <label>What is your name?</label>
-        <input v-model="name" />
-        <button type="submit">Send</button>
+        <label class="mb-5 block text-sm font-medium leading-6 text-gray-900"
+          >What is your name?</label
+        >
+        <input
+          v-model="name"
+          class="mb-5 block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+        />
+        <button
+          type="submit"
+          class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          Send
+        </button>
       </form>
     </div>
-    <div class="chat-container" v-else>
+    <div class="h-full justify-between flex flex-col" v-else>
       <div class="messages-container">
         <div v-for="message in messages">
           [{{ message.name }}]: {{ message.text }}
         </div>
       </div>
 
-      <div v-if="typingDisplay">{{ typingDisplay }}</div>
+      <div>
+        <div v-if="typingDisplay">{{ typingDisplay }}</div>
 
-      <hr />
+        <hr class="my-5" />
 
-      <div class="message-input">
-        <form @submit.prevent="sendMessage">
-          <label>Message:</label>
-          <input v-model="messageText" @input="emitTyping" />
-          <button type="submit">Send</button>
-        </form>
+        <div class="message-input">
+          <form @submit.prevent="sendMessage">
+            <label class="mr-5 text-sm font-medium leading-6 text-gray-900"
+              >Message:</label
+            >
+            <input
+              v-model="messageText"
+              @input="emitTyping"
+              class="mr-5 rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            />
+            <button
+              type="submit"
+              class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              Send
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-@import "./assets/base.css";
-
-.chat {
-  padding: 20px;
-  height: 100vh;
-}
-
-.chat-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.messages-container {
-  flex: 1;
-}
-</style>
