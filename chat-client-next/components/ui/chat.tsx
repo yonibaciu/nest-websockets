@@ -5,6 +5,7 @@ import { io } from "socket.io-client";
 import { useState, useEffect } from "react";
 import { Button } from "./button";
 import { Label } from "./label";
+import { JoinForm } from "./join-form";
 
 type Message = {
   name: string;
@@ -16,7 +17,6 @@ export default function Chat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [messageText, setMessageText] = useState("");
   const [joined, setJoined] = useState<boolean>(false);
-  const [name, setName] = useState("");
   const [typingDisplay, setTypingDisplay] = useState("");
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function Chat() {
     });
   }, []);
 
-  const join = () => {
+  const join = (name: string) => {
     socket.emit("join", { name: name }, () => {
       setJoined(true);
     });
@@ -59,12 +59,9 @@ export default function Chat() {
   };
 
   return (
-    <div className="flex flex-1 p-10">
+    <div className="flex flex-1 w-full p-10">
       {!joined && (
-        <div className="flex items-center space-x-2">
-          <Input onChange={(e) => setName(e.target.value)} />
-          <Button onClick={join} disabled={name == ''}>Join</Button>
-        </div>
+        <JoinForm join={join} />
       )}
       {joined && (
         <>
