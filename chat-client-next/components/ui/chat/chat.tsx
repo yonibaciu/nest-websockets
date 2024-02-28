@@ -1,10 +1,10 @@
 "use client";
 
-import { Input } from "./input";
+import { Input } from "../input";
 import { io } from "socket.io-client";
 import { useState, useEffect } from "react";
-import { Button } from "./button";
-import { Label } from "./label";
+import { Button } from "../button";
+import { Label } from "../label";
 import { JoinForm } from "./join-form";
 
 type Message = {

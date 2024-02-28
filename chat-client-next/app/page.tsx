@@ -1,4 +1,4 @@
-import Chat from "@/components/ui/chat";
+import Chat from "@/components/ui/chat/chat";
 import ThemeSwitch from "@/components/ui/theme-switch";
 
 export default function Home() {

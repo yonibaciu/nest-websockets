@@ -4,17 +4,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod"
 
-import { Button } from "./button";
-import { Input } from "./input";
+import { Button } from "../button";
+import { Input } from "../input";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "./form";
+} from "../form";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -43,7 +42,7 @@ export function JoinForm(props: Props) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
         <FormField
           control={form.control}
           name="name"
@@ -53,9 +52,6 @@ export function JoinForm(props: Props) {
               <FormControl>
                 <Input placeholder="Enter your name.." {...field} />
               </FormControl>
-              <FormDescription>
-                This is your name.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
