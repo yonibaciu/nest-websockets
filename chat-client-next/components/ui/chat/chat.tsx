@@ -5,6 +5,7 @@ import { io } from "socket.io-client";
 import { useState, useEffect } from "react";
 import { Button } from "../button";
 import { Label } from "../label";
+import { Separator } from "../separator";
 import { JoinForm } from "./join-form";
 
 type Message = {
@@ -25,6 +26,7 @@ export default function Chat() {
     });
 
     socket.on("message", (message) => {
+      console.log(message);
       setMessages(oldMessages => [...oldMessages, message]);
     });
 
@@ -35,6 +37,11 @@ export default function Chat() {
         setTypingDisplay("");
       }
     });
+
+    return () => {
+      socket.off("message");
+      socket.off("typing");
+    } 
   }, []);
 
   const join = (name: string) => {
@@ -79,7 +86,7 @@ export default function Chat() {
             <div>
               {typingDisplay && <div>{typingDisplay}</div>}
 
-              <hr className="my-5" />
+              <Separator className="my-5" />
 
               <div className="flex items-center space-x-2">
                 <Label>
